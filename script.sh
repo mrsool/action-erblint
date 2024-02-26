@@ -21,10 +21,11 @@ else
 fi
 
 echo '::group:: Running erb-lint with reviewdog 🐶 ...'
-${BUNDLE_EXEC}erblint --lint-all --format compact \
+${BUNDLE_EXEC}erblint ${INPUT_ERBLINT_FLAGS} --lint-all --format compact \
   | reviewdog \
       -efm="%f:%l:%c: %m" \
       -reporter="${INPUT_REPORTER}" \
       -filter-mode="${INPUT_FILTER_MODE}" \
+      -fail-on-error="${INPUT_FAIL_ON_ERROR}" \
       -level="${INPUT_LEVEL}"
 echo '::endgroup::'
